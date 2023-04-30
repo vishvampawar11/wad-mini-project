@@ -24,7 +24,7 @@ const getBook = async (req, res) => {
     const book = await Book.findOne({ _id: bookId });
 
     if (!book) {
-      return res.status(404).json({ msg: `No book with id: ${taskId}` });
+      return res.status(404).json({ msg: `No book with id: ${bookId}` });
     }
 
     res.status(200).json({ book });
@@ -43,7 +43,7 @@ const updateBook = async (req, res) => {
     });
 
     if (!book) {
-      return res.status(404).json({ msg: `No book with id: ${taskId}` });
+      return res.status(404).json({ msg: `No book with id: ${bookId}` });
     }
     res.status(200).json({ book });
   } catch (error) {
@@ -57,7 +57,7 @@ const deleteBook = async (req, res) => {
     const book = await Book.findOneAndDelete({ _id: bookId });
 
     if (!book) {
-      return res.status(404).json({ msg: `No book with id: ${taskId}` });
+      return res.status(404).json({ msg: `No book with id: ${bookId}` });
     }
     res.status(200).json({ book });
   } catch (error) {
