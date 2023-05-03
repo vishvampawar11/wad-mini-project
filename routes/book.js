@@ -1,19 +1,23 @@
-const express = require("express");
+const express = require('express');
 const {
   getAllBooks,
   createBook,
   getBook,
   deleteBook,
   updateBook,
-} = require("../controllers/bookController");
+} = require('../controllers/bookController');
 
 const router = express.Router();
+const requireAuth = require('../middleware/requireAuth');
+const requireAdmin = require('../middleware/requireAdmin');
 
-router.get("/", getAllBooks);
-router.post("/", createBook);
+// Normal User
+router.get('/', requireAuth, getAllBooks);
+router.get('/:bookId', requireAuth, getBook);
 
-router.get("/:bookId", getBook);
-router.put("/:bookId", updateBook);
-router.delete("/:bookId", deleteBook);
+// Admin
+router.post('/', requireAuth, requireAdmin, createBook);
+router.put('/:bookId', requireAuth, requireAdmin, updateBook);
+router.delete('/:bookId', requireAuth, requireAdmin, deleteBook);
 
 module.exports = router;
